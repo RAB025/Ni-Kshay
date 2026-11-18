@@ -1,0 +1,494 @@
+/* Ni-Kshay Automation - Modern Dark Emerald/Slate Theme */
+:root {
+    --bg-dark: #0B0F19;
+    --card-bg: #111827;
+    --card-surface: #1E293B;
+    --border-subtle: #1F2937;
+    --border-accent: #334155;
+    --primary: #10B981;
+    --primary-hover: #059669;
+    --primary-glow: rgba(16, 185, 129, 0.2);
+    --cyan: #06B6D4;
+    --sky: #38BDF8;
+    --amber: #F59E0B;
+    --rose: #EF4444;
+    --text-main: #F1F5F9;
+    --text-muted: #94A3B8;
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-stack);
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 12px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header Bar */
+header {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.06));
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: 14px;
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.hcontent {
+    flex: 1 1 auto;
+    min-width: 120px;
+    word-break: break-word;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+}
+
+#email {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 13px;
+    background: rgba(30, 41, 59, 0.7);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border-accent);
+    display: inline-flex;
+    align-items: center;
+}
+
+#version {
+    font-size: 12px;
+    color: var(--cyan);
+    background: rgba(6, 182, 212, 0.15);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    font-weight: 600;
+}
+
+/* Fieldsets as Glassmorphic Cards */
+fieldset {
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+}
+
+legend {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    padding: 2px 10px;
+    background: var(--card-surface);
+    border-radius: 6px;
+    border: 1px solid var(--border-accent);
+}
+
+/* Red / Help banner */
+fieldset.red {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(185, 28, 28, 0.05));
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #FCA5A5;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+fieldset.red legend {
+    color: var(--rose);
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* File Input */
+input[type="file"] {
+    width: 100%;
+    color: var(--text-main);
+    background: var(--card-surface);
+    border: 1px solid var(--border-accent);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+input[type="file"]:hover {
+    border-color: var(--primary);
+}
+
+input[type="file"]::file-selector-button {
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+    color: #FFFFFF;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 10px;
+    box-shadow: 0 2px 6px var(--primary-glow);
+}
+
+/* Flex Row Containers */
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.flex fieldset {
+    background: var(--card-surface);
+    border: 1px solid var(--border-accent);
+    margin: 0;
+    min-width: 76px;
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex fieldset legend {
+    font-size: 10px;
+    padding: 2px 6px;
+    background: var(--card-bg);
+}
+
+/* Stat Counters */
+#infoTotal {
+    color: var(--sky);
+    font-size: 18px;
+    font-weight: 800;
+    display: block;
+    margin-top: 2px;
+}
+
+#infoDone {
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: 800;
+    display: block;
+    margin-top: 2px;
+}
+
+#infoRemain {
+    color: var(--amber);
+    font-size: 18px;
+    font-weight: 800;
+    display: block;
+    margin-top: 2px;
+}
+
+/* Toggle Switch (iOS-style clean smooth pill) */
+.toggle {
+    width: 54px;
+    height: 28px;
+    position: relative;
+    margin: 4px auto;
+}
+
+#switch {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.toggle label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 54px;
+    height: 28px;
+    background-color: #374151;
+    border-radius: 28px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    border: 1px solid #4B5563;
+}
+
+#switch:checked + label {
+    background-color: #10B981;
+    border-color: #059669;
+}
+
+.move {
+    pointer-events: none;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 50%;
+    background-color: #EF4444;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.move::after {
+    font-size: 9px;
+    font-weight: 800;
+    content: "OFF";
+    color: #FFFFFF;
+    letter-spacing: 0.02em;
+}
+
+#switch:checked ~ .move {
+    transform: translateX(26px);
+    background-color: #FFFFFF;
+}
+
+#switch:checked ~ .move::after {
+    content: "ON";
+    color: #059669;
+}
+
+/* Buttons Group */
+.buttons-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    padding-top: 4px;
+}
+
+.button {
+    background: linear-gradient(135deg, #10B981, #059669);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 8px 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.button:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.35);
+}
+
+.button:active {
+    transform: scale(0.97);
+}
+
+#deleteSheet {
+    background: linear-gradient(135deg, #EF4444, #DC2626) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3) !important;
+}
+
+#deleteSheet:hover {
+    background: linear-gradient(135deg, #DC2626, #B91C1C) !important;
+}
+
+#exportSheet {
+    background: linear-gradient(135deg, #3B82F6, #2563EB) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3) !important;
+}
+
+#btnExportLogs {
+    background: linear-gradient(135deg, #059669, #047857) !important;
+    color: #FFFFFF !important;
+}
+
+#btnViewLogs {
+    background: linear-gradient(135deg, #4F46E5, #4338CA) !important;
+    color: #FFFFFF !important;
+}
+
+.hyperLinkButtons {
+    background: var(--card-surface);
+    color: var(--sky);
+    border: 1px solid var(--border-accent);
+    border-radius: 8px;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.hyperLinkButtons:hover {
+    background: #253347;
+    border-color: var(--sky);
+    transform: translateY(-1px);
+}
+
+.hyperLinkButtons:active {
+    transform: scale(0.97);
+}
+
+/* Data Table Styling */
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 10px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    background: var(--card-bg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+table {
+    border-collapse: collapse;
+    color: var(--text-main);
+    font-size: 13px;
+    width: 100%;
+    border: none !important;
+}
+
+th {
+    background: var(--card-surface);
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-accent);
+    white-space: nowrap;
+    text-align: left;
+}
+
+td {
+    padding: 9px 12px;
+    white-space: nowrap;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+tr:hover {
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+td:nth-child(2) {
+    color: #F87171;
+    font-weight: 600;
+}
+
+.yellow-bg {
+    background-color: rgba(245, 158, 11, 0.22) !important;
+    color: #FDE68A !important;
+    font-weight: 700 !important;
+}
+
+/* Loading Overlay */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(11, 15, 25, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading .logo {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    animation: rotate infinite 2.5s linear;
+}
+
+.loading .logo .boll {
+    width: 90%;
+    height: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(calc(var(--i) * 27.69deg));
+}
+
+.loading .logo .boll::before {
+    content: "";
+    position: absolute;
+    width: calc(var(--i) * 1px + 2px);
+    height: calc(var(--i) * 1px + 2px);
+    background-color: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--primary);
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    header {
+        padding: 10px 12px;
+    }
+
+    header .hcontent {
+        font-size: 14px;
+    }
+
+    .button, .hyperLinkButtons {
+        padding: 8px 12px;
+        font-size: 12px;
+        flex: 1 1 calc(50% - 8px);
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px 10px;
+    }
+}

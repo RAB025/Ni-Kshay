@@ -1,0 +1,15 @@
+<resources>
+    <color name="black">#FF0B0F19</color>
+    <color name="bg_dark">#FF0B0F19</color>
+    <color name="surface_dark">#FF111827</color>
+    <color name="surface_card">#FF1F2937</color>
+    <color name="border_dark">#FF374151</color>
+    <color name="lime">#FF10B981</color>
+    <color name="limegreen">#FF10B981</color>
+    <color name="primary_glow">#FF34D399</color>
+    <color name="accent_cyan">#FF06B6D4</color>
+    <color name="accent_purple">#FF8B5CF6</color>
+    <color name="white">#FFF9FAFB</color>
+    <color name="text_muted">#FF9CA3AF</color>
+    <color name="red">#FFEF4444</color>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="tab_automation">⚡ Automation</string>
+    <string name="tab_manager">👑 User Manager</string>
+    <string name="tab_portal">🌐 Nikshay Site</string>
+</resources>

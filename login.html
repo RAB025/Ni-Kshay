@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ni-Kshay Automation — Client Activation</title>
+    <style>
+        :root {
+            --bg-dark: #0B0F19;
+            --surface-card: #111827;
+            --surface-elevated: #1F2937;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(16, 185, 129, 0.3);
+            --primary: #10B981;
+            --primary-hover: #059669;
+            --primary-glow: rgba(16, 185, 129, 0.25);
+            --red: #EF4444;
+            --text-main: #F9FAFB;
+            --text-muted: #9CA3AF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-accent);
+            border-radius: 20px;
+            padding: 32px 24px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+        }
+
+        .app-title {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .app-icon {
+            font-size: 36px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+            border: 1px solid var(--border-accent);
+            border-radius: 50%;
+            width: 68px;
+            height: 68px;
+            line-height: 68px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .app-title h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #10B981, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .app-title p {
+            margin: 4px 0 0;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .alert-box {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid var(--red);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            color: #ffb3ba;
+            line-height: 1.4;
+            display: none;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
+            background: var(--surface-elevated);
+            color: var(--text-main);
+            font-size: 14px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+            background: #1e293b;
+        }
+
+        .token-input-group {
+            position: relative;
+        }
+
+        .btn-paste {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: #374151;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--primary);
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-paste:hover {
+            background: #4b5563;
+        }
+
+        .btn-activate {
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: #000;
+            border: none;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 800;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+            transition: all 0.2s;
+        }
+
+        .btn-activate:active {
+            transform: scale(0.98);
+        }
+
+        .btn-wa {
+            background: #25d366;
+            color: #000;
+            border: none;
+            padding: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 12px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-wa:hover {
+            background: #1ebe5d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="app-title">
+            <div class="app-icon">🔑</div>
+            <h2>Ni-Kshay Automation</h2>
+            <p>Field Staff License & Token Activation</p>
+        </div>
+
+        <div id="alertBox" class="alert-box"></div>
+
+        <form id="authForm">
+            <label for="username">Staff Login ID / Username <span style="color:var(--red);">*</span></label>
+            <input type="text" id="username" placeholder="e.g. sts_anantnag or nurse_01" required autocomplete="username">
+
+            <label for="token">Access Token <span style="color:var(--red);">*</span></label>
+            <div class="token-input-group">
+                <textarea id="token" rows="3" placeholder="Paste your NKA1 token here..." required style="resize: none;"></textarea>
+                <button type="button" class="btn-paste" id="btnPaste">Paste</button>
+            </div>
+
+            <button type="submit" class="btn-activate" id="btnSubmit">Activate Access</button>
+        </form>
+
+        <a id="btnWhatsAppAdmin" class="btn-wa" target="_blank" href="https://api.whatsapp.com/send?phone=917006444824&text=Hello%20Admin,%20please%20provide%20a%20Ni-Kshay%20Automation%20token.">
+            💬 Request Token from Admin on WhatsApp
+        </a>
+    </div>
+
+    <script src="script/auth.js"></script>
+    <script src="script/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ni-Kshay Automation</title>
+    <link rel="stylesheet" href="css/option.css">
+    <script src="lib/xlsx.js"></script>
+    <script src="lib/xlsxEport.js"></script>
+</head>
+
+<body>
+    <div class="loading" id="loading">
+        <div class="logo">
+            <div class="boll" style="--i:1"></div>
+            <div class="boll" style="--i:2"></div>
+            <div class="boll" style="--i:3"></div>
+            <div class="boll" style="--i:4"></div>
+            <div class="boll" style="--i:5"></div>
+            <div class="boll" style="--i:6"></div>
+            <div class="boll" style="--i:7"></div>
+            <div class="boll" style="--i:8"></div>
+            <div class="boll" style="--i:9"></div>
+            <div class="boll" style="--i:10"></div>
+            <div class="boll" style="--i:11"></div>
+            <div class="boll" style="--i:12"></div>
+            <div class="boll" style="--i:13"></div>
+        </div>
+    </div>
+
+    <header>
+        <h3 class="hcontent">Ni-Kshay Automation</h3>
+        <h3 class="hcontent" id="email"></h3>
+        <h3 id="version"></h3>
+    </header>
+
+    <fieldset class="red">
+        <legend>HELP</legend>
+        Call OR Whatsapp 7006444824
+    </fieldset>
+
+    <fieldset>
+        <legend>Choose File</legend>
+        <input type="file" name="file" id="upload">
+    </fieldset>
+
+    <fieldset class="flex">
+        <legend>Info And Buttons Tab</legend>
+        <fieldset>
+            <legend>Total</legend>
+            <strong id="infoTotal"></strong>
+        </fieldset>
+        <fieldset>
+            <legend>Done</legend>
+            <strong id="infoDone"></strong>
+        </fieldset>
+        <fieldset>
+            <legend>Remaining</legend>
+            <strong id="infoRemain"></strong>
+        </fieldset>
+        <fieldset>
+            <legend>Switch</legend>
+            <div class="toggle">
+                <input type="checkbox" class="checkbox" id="switch">
+                <label for="switch" class="checbokx"></label>
+                <div class="move"></div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Buttons</legend>
+            <div class="buttons-group">
+                <button name="skip" class="button">Previous</button>
+                <button name="skip" id="skip" class="button">Skip</button>
+                <button class="button" id="deleteSheet">Delete Sheet</button>
+                <button class="button" id="exportSheet">Export Sheet</button>
+                <button class="button" id="btnExportLogs" style="background:#27ae60;color:#fff;">Export Logs</button>
+                <button class="button" id="btnViewLogs">View Logs</button>
+
+                <a class="hyperLinkButtons" target="_blank" href="https://nikshay.in/Dashboard/Overview">Open Site</a>
+                <a class="hyperLinkButtons" href="x-ray.html">X-Ray</a>
+                <a class="hyperLinkButtons" href="trunat.html">Trunat</a>
+                <a class="hyperLinkButtons" href="login.html" style="background:#8e44ad;color:#fff;">🔑 Renew Token</a>
+                <a class="hyperLinkButtons" data-template="Nikshay Tamplate.xlsx" download="Nikshay Tamplate.xlsx" href="Nikshay Tamplate.xlsx">Download Tamplate</a>
+            </div>
+        </fieldset>
+    </fieldset>
+
+    <div class="table-wrap">
+        <table id="dataTable" border="1">
+            <tbody id="tableList"></tbody>
+        </table>
+    </div>
+
+    <script src="script/auth.js"></script>
+    <script src="script/common.js"></script>
+    <script src="script/option.js"></script>
+</body>
+
+</html>

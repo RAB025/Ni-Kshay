@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ni-Kshay Manager — User & License Management</title>
+    <style>
+        :root {
+            --bg-dark: #0B0F19;
+            --surface-card: #111827;
+            --surface-elevated: #1F2937;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(16, 185, 129, 0.3);
+            --primary: #10B981;
+            --primary-hover: #059669;
+            --primary-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #06B6D4;
+            --purple: #8B5CF6;
+            --red: #EF4444;
+            --text-main: #F9FAFB;
+            --text-muted: #9CA3AF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* 1. Header */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            font-size: 24px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+            border: 1px solid var(--border-accent);
+            border-radius: 10px;
+            padding: 6px 10px;
+        }
+
+        .brand-text h2 {
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10B981, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .brand-text p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .btn-lock {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-lock:hover {
+            color: var(--red);
+            border-color: var(--red);
+        }
+
+        /* 2. Cards */
+        .card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+
+        .card-header h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-header h3 span {
+            color: var(--primary);
+        }
+
+        /* 3. Inputs & Forms */
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
+            background: var(--surface-elevated);
+            color: var(--text-main);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+            background: #1e293b;
+        }
+
+        /* 4. Duration Pills */
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .preset-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .preset-btn.active, .preset-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: #000;
+            border-color: transparent;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* 5. Action Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: #000;
+            border: none;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 16px;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-wa {
+            background: #25d366;
+            color: #000;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-wa:hover {
+            background: #1ebe5d;
+        }
+
+        .btn-renew {
+            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: #000;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+
+        .btn-copy {
+            background: var(--surface-elevated);
+            color: var(--text-main);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-copy:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* 6. Token Box */
+        .token-box {
+            word-break: break-all;
+            background: #000;
+            padding: 14px;
+            border: 1px dashed var(--primary);
+            border-radius: 8px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--primary);
+            margin-top: 12px;
+            user-select: all;
+        }
+
+        /* 7. Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-green { background: rgba(16, 185, 129, 0.15); color: var(--primary); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-red { background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+        /* 8. User History List */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+            max-height: 480px;
+            overflow-y: auto;
+        }
+
+        .history-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+
+        .history-card:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .history-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .client-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .history-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        /* 9. Sleek PIN Security Vault Gate */
+        #loginGate {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            padding: 20px;
+        }
+
+        .pin-vault-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-accent);
+            border-radius: 20px;
+            padding: 32px 24px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+        }
+
+        .vault-icon {
+            font-size: 40px;
+            margin-bottom: 14px;
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--border-accent);
+            border-radius: 50%;
+            width: 76px;
+            height: 76px;
+            line-height: 76px;
+        }
+
+        .vault-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        .vault-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .pin-display {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .pin-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid var(--border-subtle);
+            background: transparent;
+            transition: all 0.2s;
+        }
+
+        .pin-dot.filled {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .keypad-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        .keypad-btn {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 14px 0;
+            cursor: pointer;
+            transition: all 0.15s;
+            user-select: none;
+        }
+
+        .keypad-btn:active {
+            background: var(--primary);
+            color: #000;
+            transform: scale(0.92);
+        }
+
+        .pin-alert {
+            color: var(--red);
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Sleek PIN Security Vault Gate (Visible until unlocked) -->
+    <div id="loginGate">
+        <div class="pin-vault-card">
+            <div class="vault-icon">🛡️</div>
+            <h2 class="vault-title">Ni-Kshay User Manager</h2>
+            <p class="vault-desc">Enter Master Access PIN to manage clients, issue tokens, and grant licenses.</p>
+
+            <div class="pin-display" id="pinDots">
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+            </div>
+
+            <input type="password" id="adminPinInput" maxlength="12" placeholder="Enter PIN..." style="text-align: center; font-size: 18px; letter-spacing: 4px; margin-bottom: 16px;">
+
+            <div class="keypad-grid">
+                <button type="button" class="keypad-btn" data-key="1">1</button>
+                <button type="button" class="keypad-btn" data-key="2">2</button>
+                <button type="button" class="keypad-btn" data-key="3">3</button>
+                <button type="button" class="keypad-btn" data-key="4">4</button>
+                <button type="button" class="keypad-btn" data-key="5">5</button>
+                <button type="button" class="keypad-btn" data-key="6">6</button>
+                <button type="button" class="keypad-btn" data-key="7">7</button>
+                <button type="button" class="keypad-btn" data-key="8">8</button>
+                <button type="button" class="keypad-btn" data-key="9">9</button>
+                <button type="button" class="keypad-btn" data-key="clear" style="font-size: 15px; color: var(--red);">⌫</button>
+                <button type="button" class="keypad-btn" data-key="0">0</button>
+                <button type="button" class="keypad-btn" data-key="enter" style="font-size: 15px; color: var(--primary);">🔓</button>
+            </div>
+
+            <button class="btn-primary" id="btnUnlockAdmin" style="margin-top: 18px;">Unlock Console</button>
+            <p id="pinError" class="pin-alert">Invalid PIN. Try default: admin2026</p>
+        </div>
+    </div>
+
+    <!-- 2. Main Admin Dashboard (Revealed after entering Access PIN) -->
+    <div id="adminDashboard" style="display: none;">
+
+        <div class="app-header">
+            <div class="brand-title">
+                <div class="brand-icon">👑</div>
+                <div class="brand-text">
+                    <h2>Ni-Kshay User Manager</h2>
+                    <p>Client License & Token Generation System</p>
+                </div>
+            </div>
+            <button class="btn-lock" id="btnLockConsole" title="Re-lock this console">
+                🔒 Lock
+            </button>
+        </div>
+
+        <!-- Card: Generate Token -->
+        <div class="card">
+            <div class="card-header">
+                <h3><span>⚡</span> Issue Client Access Token</h3>
+            </div>
+
+            <label for="inputUsername">Client Login ID / Staff Username <span style="color:var(--red);">*</span></label>
+            <input type="text" id="inputUsername" placeholder="e.g. dr_sharma or health_center_01" autocomplete="off">
+
+            <label for="inputPasscode">Optional User Passcode / Note</label>
+            <input type="text" id="inputPasscode" placeholder="Leave empty for ID-only token" autocomplete="off">
+
+            <label>Token Validity Duration</label>
+            <div class="btn-group" id="presetButtons">
+                <button type="button" class="preset-btn" data-days="1">1 Day</button>
+                <button type="button" class="preset-btn" data-days="7">7 Days</button>
+                <button type="button" class="preset-btn" data-days="15">15 Days</button>
+                <button type="button" class="preset-btn active" data-days="30">30 Days</button>
+                <button type="button" class="preset-btn" data-days="60">60 Days</button>
+                <button type="button" class="preset-btn" data-days="90">90 Days</button>
+                <button type="button" class="preset-btn" data-days="365">1 Year</button>
+                <button type="button" class="preset-btn" id="btnCustomExpiry">Custom Date</button>
+            </div>
+
+            <div id="customDateContainer" style="display: none; margin-top: 12px;">
+                <label for="customExpiryDate">Select Expiration Date & Time</label>
+                <input type="datetime-local" id="customExpiryDate">
+            </div>
+
+            <button class="btn-primary" id="btnGenerate">
+                ✨ Generate Signed Access Token
+            </button>
+
+            <!-- Generated Token Result -->
+            <div id="resultCard" style="display: none; margin-top: 20px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <strong style="color: var(--primary); font-size: 14px;">✅ Token Generated Ready for Client</strong>
+                    <span id="resultBadge" class="badge badge-green">30 Days</span>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); margin: 6px 0;">
+                    Client: <strong id="resultUser" style="color: var(--text-main);"></strong> • 
+                    Expires: <strong id="resultExpires" style="color: var(--text-main);"></strong>
+                </p>
+
+                <div class="token-box" id="resultTokenText"></div>
+
+                <div style="display: flex; gap: 10px; margin-top: 14px;">
+                    <button class="btn-copy" id="btnCopyToken" style="flex: 1; padding: 12px;">📋 Copy Token</button>
+                    <button class="btn-wa" id="btnShareWhatsApp" style="flex: 1; padding: 12px; justify-content: center;">💬 Send via WhatsApp</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Client Management & History -->
+        <div class="card">
+            <div class="card-header">
+                <h3><span>👥</span> Client Directory & Issued Tokens</h3>
+                <button id="btnClearHistory" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 12px;">Clear History</button>
+            </div>
+
+            <input type="text" id="historySearch" placeholder="🔍 Search clients by Login ID..." style="margin-bottom: 12px;">
+
+            <div class="history-list" id="historyList">
+                <p style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">No clients registered yet.</p>
+            </div>
+        </div>
+
+        <!-- Card: Token Verifier -->
+        <div class="card">
+            <div class="card-header">
+                <h3><span>🔍</span> Token Verifier & Inspector</h3>
+            </div>
+            <label for="verifyInput">Paste Any Client Token to Test</label>
+            <input type="text" id="verifyInput" placeholder="NKA1.eyJ1Ijoi..." autocomplete="off">
+            <button class="btn-copy" id="btnVerify" style="margin-top: 10px; width: 100%; padding: 12px;">Inspect Token Validity</button>
+
+            <div id="verifyResult" style="display: none; margin-top: 14px;"></div>
+        </div>
+
+    </div>
+
+    <script src="script/auth.js"></script>
+    <script src="script/admin.js"></script>
+</body>
+</html>
